@@ -1,0 +1,41 @@
+.ms-editor-root {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+q {
+    display: block;
+    position: relative;
+    text-align: center;
+    // background: #fafafa;
+    font-size: 1.2em;
+    padding: 10px 0;
+}
+
+q:before {
+    position: absolute;
+    left: -15px;
+    top: -10px;
+    font-size: 2em;
+    color: #eee;
+}
+
+q:after {
+    position: absolute;
+    right: -15px;
+    top: -10px;
+    font-size: 2em;
+    color: #eee;
+}
+
+
+blockquote {
+    border-left: 5px solid #4CA8DE;
+    color: #555;
+    font-family: 'Hoefler Text', 'Georgia', serif;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 10px 0 10px 20px;
+    background-color: #E2F2FF;
+}
