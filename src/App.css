@@ -7,13 +7,12 @@
 q {
     display: block;
     position: relative;
-    text-align: center;
-    // background: #fafafa;
     font-size: 1.2em;
     padding: 10px 0;
+    font-size: 2em;
 }
 
-q:before {
+/*q:before {
     position: absolute;
     left: -15px;
     top: -10px;
@@ -27,7 +26,7 @@ q:after {
     top: -10px;
     font-size: 2em;
     color: #eee;
-}
+}*/
 
 
 blockquote {

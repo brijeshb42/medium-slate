@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, { Component } from 'react';
-import { Editor, Raw, Html } from 'slate'
+import Slate, { Editor, Raw, Plain } from 'slate'
 
 import {
   bold,
@@ -24,27 +24,29 @@ import {
 } from './blocks';
 
 import MarkHotKeyPlugin from './plugins/MarkHotKey';
-import rules from './rules/html';
+import BackSpacePlugin from './plugins/BackSpace.js';
+// import rules from './rules/html';
 
-const html = new Html({ rules });
+// const html = new Html({ rules });
+window.Slate = Slate;
 
-const initialState = `
-<h1>Heading 1</h1>
-<h2>Heading 2</h2>
-<h3>Heading 3</h3>
-<h4>Heading 4</h4>
-<h5>Heading 5</h5>
-<h6>Heading 6</h6>
-<p>Paragraph</p>
-<q>pullquote</q>
-<blockquote>Block quote</blockquote>
-<p>paragraph</p>
-<blockquote><h3>Heading inside bq</h3><q>Pq</q></blockquote>
-`;
+// const initialState = `
+// <h1>Heading 1</h1>
+// <h2>Heading 2</h2>
+// <h3>Heading 3</h3>
+// <h4>Heading 4</h4>
+// <h5>Heading 5</h5>
+// <h6>Heading 6</h6>
+// <p>Paragraph</p>
+// <q>pullquote</q>
+// <blockquote>Block quote</blockquote>
+// <p>paragraph</p>
+// <blockquote><h3>Heading inside bq</h3><q>Pq</q></blockquote>
+// `;
 
 class App extends Component {
   state = {
-    state: html.deserialize(initialState),
+    state: Plain.deserialize(''),
     schema: {
       marks: {
         bold,
@@ -72,18 +74,21 @@ class App extends Component {
     MarkHotKeyPlugin({ type: 'italic', key: 73 }),
     MarkHotKeyPlugin({ type: 'underline', key: 85 }),
     MarkHotKeyPlugin({ type: 'code', key: 74 }),
+    BackSpacePlugin(),
   ]
 
   componentDidMount() {
     this._editor.focus();
+    window.onChange = this.onChange;
   }
 
   onChange = (state) => {
     this.setState({ state })
+    window.state = state;
   }
 
   onDocumentChange = (document, state) => {
-    const string = html.serialize(state)
+    const string = JSON.stringify(Raw.serialize(state));
     localStorage.setItem('content', string)
   }
 
@@ -108,7 +113,7 @@ class App extends Component {
             state={state}
             onChange={onChange}
             onDocumentChange={onDocumentChange}
-            placeholder="Type Something..."
+            placeholder={"Type Something..."}
           />
         </div>
       </div>
